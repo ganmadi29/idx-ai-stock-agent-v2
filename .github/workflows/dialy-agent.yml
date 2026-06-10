@@ -1,0 +1,26 @@
+name: IDX AI Agent
+
+on:
+  schedule:
+    # 09:45 UTC = 16:45 WIB — after IDX close (16:15 WIB), weekdays only.
+    # One run/day: the old 4x/day schedule compared partial-day volume
+    # against a full-day average, producing inconsistent signals per run.
+    - cron: '45 9 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python main.py
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}

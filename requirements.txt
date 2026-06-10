@@ -1,0 +1,10 @@
+pandas>=2.2,<3
+numpy>=1.26,<3
+yfinance>=0.2.50,<0.3
+feedparser>=6.0,<7
+groq>=0.13,<1
+gspread>=6.0,<7
+google-auth>=2.30,<3
+requests>=2.32,<3
+streamlit>=1.38,<2
+plotly>=5.22,<6
